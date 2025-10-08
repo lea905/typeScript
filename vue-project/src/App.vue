@@ -1,28 +1,17 @@
 <script setup lang="ts">
-import InputText from 'primevue/inputtext';
-import { ref } from 'vue';
-import CustomButton from './components/CustomButton.vue';
+import { type Ref, ref } from 'vue';
+import AuthorCard from './components/AuthorCard.vue';
+import type { AuthorModel } from './models/Author.model';
 
-const header = 'My App';
-const msg = ref('Hello World!');
-
-function reinit() {
-  msg.value = '';
+const author: Ref<AuthorModel> = ref({ firstName: 'George', name: 'Orwell', id: 0 });
+const test = ref('Titre auteur');
+function saveAuthor(newAuthor: AuthorModel) {
+  author.value = { ...newAuthor };
 }
-
 </script>
 
-
-
 <template>
-  <h1>{{ header }}</h1>
-  <div>
-    <InputText v-model="msg" /> 
-    {{ msg }}
-    <CustomButton v-bind:msg="msg"></CustomButton>
-   
-  </div>
+  <RouterView></RouterView>
 </template>
 
-
-
+<style scoped></style>
