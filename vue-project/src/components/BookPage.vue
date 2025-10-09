@@ -24,7 +24,7 @@
     v-model:visible="bookVisible"
     @update:book="updateBook($event)"
   />
-  <AuthorCard v-if="authorVisible" :author="selectedAuthor" v-model:visible="authorVisible" />
+  <AuthorCard v-if="authorVisible" :author="selectedAuthor" v-model:visible="authorVisible" @update:author="updateAuthor($event)" />
 </template>
 
 <script setup lang="ts">
@@ -96,4 +96,15 @@ const updateBook = (newBook: BookModel) => {
   }
   bookVisible.value = false
 }
+
+const updateAuthor = (newAuthor: AuthorModel) => {
+
+  const bookToUpdate = books.value.find(b => b.author.id === newAuthor.id)
+  if (bookToUpdate) {
+    bookToUpdate.author = { ...newAuthor }
+  }
+  authorVisible.value = false
+}
+
+
 </script>
