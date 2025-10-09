@@ -45,6 +45,7 @@ const openDialog = (author: AuthorModel) => {
   visible.value = true
 }
 
+
 const updateAuthor = (newAuthor: AuthorModel) => {
   const index = authors.value.findIndex((a) => a.id === newAuthor.id)
   if (index !== -1) {
