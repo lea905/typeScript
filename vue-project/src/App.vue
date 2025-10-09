@@ -44,3 +44,4 @@ const items = ref([
   },
 ])
 </script>
+<style scoped></style>
