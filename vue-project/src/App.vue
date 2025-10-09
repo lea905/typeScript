@@ -1,17 +1,52 @@
-<script setup lang="ts">
-import { type Ref, ref } from 'vue';
-import AuthorCard from './components/AuthorCard.vue';
-import type { AuthorModel } from './models/Author.model';
 
-const author: Ref<AuthorModel> = ref({ firstName: 'George', name: 'Orwell', id: 0 });
-const test = ref('Titre auteur');
-function saveAuthor(newAuthor: AuthorModel) {
-  author.value = { ...newAuthor };
-}
-</script>
-
+  
 <template>
-  <RouterView></RouterView>
+    <div class="card flex justify-center">
+        <Menu :model="items">
+            <template #item="{ item, props }">
+                <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
+                    <a v-ripple :href="href" v-bind="props.action" @click="navigate">
+                        <span class="ml-2">{{ item.label }}</span>
+                    </a>
+                </router-link>
+                <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
+                    <span class="ml-2">{{ item.label }}</span>
+                </a>
+            </template>
+        </Menu>
+    </div>
+      <RouterView></RouterView>
 </template>
 
-<style scoped></style>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from 'vue-router';
+import Menu from 'primevue/menu';
+
+const router = useRouter();
+
+const items = ref([
+    {
+        label: 'Authors',
+        route: '/authors',
+        icon: 'pi pi-users'
+    },
+    {
+        label: 'Books',
+        route: '/books',
+        icon: 'pi pi-book'
+    },
+    {
+        label: 'Bookk Collections',
+        route: '/book-collections',
+        icon: 'pi pi-bookmark'
+    }
+]);
+</script>
+
+
+
+
+
+
+
